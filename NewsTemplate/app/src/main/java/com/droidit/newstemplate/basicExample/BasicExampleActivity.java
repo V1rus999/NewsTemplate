@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.droidit.domain.basicExample.BasicExampleContract;
+import com.droidit.domain.basicExample.BasicExamplePresenter;
 import com.droidit.newstemplate.DefaultApplication;
 import com.droidit.newstemplate.R;
 import com.droidit.newstemplate.dependencyInjection.ApplicationComponent;
@@ -32,7 +33,7 @@ public class BasicExampleActivity extends AppCompatActivity implements BasicExam
     private BasicExampleComponent basicExampleComponent;
 
     @Inject
-    BasicExampleContract.Presenter basicExamplePresenter;
+    BasicExamplePresenter basicExamplePresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
