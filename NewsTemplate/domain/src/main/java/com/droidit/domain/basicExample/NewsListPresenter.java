@@ -5,7 +5,6 @@ import com.droidit.domain.posts.PostDto;
 import com.droidit.domain.posts.PostInteractor;
 
 import java.util.List;
-import java.util.Random;
 
 import javax.inject.Inject;
 
@@ -26,8 +25,13 @@ public class NewsListPresenter implements NewsListContract.Presenter {
     }
 
     @Override
-    public void onCreate(NewsListContract.View view) {
+    public void onViewAttached(NewsListContract.View view) {
         this.view = view;
+    }
+
+    @Override
+    public void onCreate() {
+        view.setupInitialList();
     }
 
     @Override
@@ -40,9 +44,7 @@ public class NewsListPresenter implements NewsListContract.Presenter {
         postInteractor.getPosts(new DefaultCallback<List<PostDto>>() {
             @Override
             public void onSuccess(List<PostDto> success) {
-                Random random = new Random();
-                int randomPost = random.nextInt(success.size());
-                view.displaySinglePostTitle(success.get(randomPost).title);
+                view.updateListWithNewData(success);
             }
 
             @Override

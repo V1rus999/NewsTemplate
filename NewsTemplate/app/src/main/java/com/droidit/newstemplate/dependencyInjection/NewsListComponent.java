@@ -1,6 +1,6 @@
 package com.droidit.newstemplate.dependencyInjection;
 
-import com.droidit.newstemplate.basicExample.NewsListActivity;
+import com.droidit.newstemplate.news_list.NewsListActivity;
 
 import dagger.Component;
 

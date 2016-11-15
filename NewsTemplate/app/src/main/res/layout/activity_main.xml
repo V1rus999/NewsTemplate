@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".basicExample.NewsListActivity">
+    tools:context=".news_list.NewsListActivity">
 
     <Button
         android:id="@+id/activity_main_launch_connection_btn"
@@ -26,5 +26,10 @@
         android:id="@+id/activity_main_posts_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/news_list_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

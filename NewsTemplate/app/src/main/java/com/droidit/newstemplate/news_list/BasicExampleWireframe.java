@@ -1,4 +1,4 @@
-package com.droidit.newstemplate.basicExample;
+package com.droidit.newstemplate.news_list;
 
 import android.app.Activity;
 

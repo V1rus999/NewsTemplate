@@ -2,6 +2,9 @@ package com.droidit.domain.basicExample;
 
 
 import com.droidit.domain.BaseContract;
+import com.droidit.domain.posts.PostDto;
+
+import java.util.List;
 
 /**
  * Created by JohannesC on 05-Sep-16.
@@ -20,6 +23,10 @@ public interface NewsListContract {
         void displaySinglePostTitle(String title);
 
         void displayConnectionError(String message);
+
+        void setupInitialList();
+
+        void updateListWithNewData(final List<PostDto> postDtos);
     }
 
     interface WireFrame {

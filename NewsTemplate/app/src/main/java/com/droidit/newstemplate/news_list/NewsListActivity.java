@@ -1,12 +1,16 @@
-package com.droidit.newstemplate.basicExample;
+package com.droidit.newstemplate.news_list;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.droidit.domain.basicExample.NewsListContract;
 import com.droidit.domain.basicExample.NewsListPresenter;
+import com.droidit.domain.posts.PostDto;
 import com.droidit.newstemplate.DefaultApplication;
 import com.droidit.newstemplate.R;
 import com.droidit.newstemplate.dependencyInjection.ApplicationComponent;
@@ -14,6 +18,8 @@ import com.droidit.newstemplate.dependencyInjection.DaggerNewsListComponent;
 import com.droidit.newstemplate.dependencyInjection.NetworkModule;
 import com.droidit.newstemplate.dependencyInjection.NewsListComponent;
 import com.droidit.newstemplate.dependencyInjection.WireframeModule;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -30,8 +36,13 @@ public class NewsListActivity extends AppCompatActivity implements NewsListContr
     @BindView(R.id.activity_main_posts_tv)
     TextView activity_main_posts_tv;
 
+    @BindView(R.id.news_list_rv)
+    RecyclerView news_list_rv;
+
     @Inject
     NewsListPresenter newsListPresenter;
+
+    private NewsListItemAdapter newsListItemAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +50,8 @@ public class NewsListActivity extends AppCompatActivity implements NewsListContr
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         this.initializeInjector();
-        newsListPresenter.onCreate(this);
+        newsListPresenter.onViewAttached(this);
+        newsListPresenter.onCreate();
     }
 
     protected ApplicationComponent getApplicationComponent() {
@@ -75,5 +87,19 @@ public class NewsListActivity extends AppCompatActivity implements NewsListContr
     public void displayConnectionError(String message) {
         activity_main_posts_tv.setTextColor(Color.RED);
         activity_main_posts_tv.setText(message);
+    }
+
+    @Override
+    public void setupInitialList() {
+        newsListItemAdapter = new NewsListItemAdapter();
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        news_list_rv.setLayoutManager(mLayoutManager);
+        news_list_rv.setItemAnimator(new DefaultItemAnimator());
+        news_list_rv.setAdapter(newsListItemAdapter);
+    }
+
+    @Override
+    public void updateListWithNewData(List<PostDto> postDtos) {
+        newsListItemAdapter.setPosts(postDtos);
     }
 }

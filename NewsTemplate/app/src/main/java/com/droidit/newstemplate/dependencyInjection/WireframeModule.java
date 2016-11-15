@@ -3,7 +3,7 @@ package com.droidit.newstemplate.dependencyInjection;
 import android.app.Activity;
 
 import com.droidit.domain.basicExample.NewsListContract;
-import com.droidit.newstemplate.basicExample.BasicExampleWireframe;
+import com.droidit.newstemplate.news_list.BasicExampleWireframe;
 
 import dagger.Module;
 import dagger.Provides;
