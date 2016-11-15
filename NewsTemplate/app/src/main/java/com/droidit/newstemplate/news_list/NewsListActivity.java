@@ -18,6 +18,8 @@ import com.droidit.newstemplate.dependencyInjection.DaggerNewsListComponent;
 import com.droidit.newstemplate.dependencyInjection.NetworkModule;
 import com.droidit.newstemplate.dependencyInjection.NewsListComponent;
 import com.droidit.newstemplate.dependencyInjection.WireframeModule;
+import com.droidit.newstemplate.news_list.list.NewsListDividerItemDecorator;
+import com.droidit.newstemplate.news_list.list.NewsListItemAdapter;
 
 import java.util.List;
 
@@ -94,6 +96,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsListContr
         newsListItemAdapter = new NewsListItemAdapter();
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         news_list_rv.setLayoutManager(mLayoutManager);
+        news_list_rv.addItemDecoration(new NewsListDividerItemDecorator(NewsListActivity.this, LinearLayoutManager.VERTICAL));
         news_list_rv.setItemAnimator(new DefaultItemAnimator());
         news_list_rv.setAdapter(newsListItemAdapter);
     }

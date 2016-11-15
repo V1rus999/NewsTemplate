@@ -1,4 +1,4 @@
-package com.droidit.newstemplate.news_list;
+package com.droidit.newstemplate.news_list.list;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
