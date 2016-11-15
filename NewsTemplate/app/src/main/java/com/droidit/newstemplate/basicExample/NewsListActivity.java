@@ -5,14 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.droidit.domain.basicExample.BasicExampleContract;
-import com.droidit.domain.basicExample.BasicExamplePresenter;
+import com.droidit.domain.basicExample.NewsListContract;
+import com.droidit.domain.basicExample.NewsListPresenter;
 import com.droidit.newstemplate.DefaultApplication;
 import com.droidit.newstemplate.R;
 import com.droidit.newstemplate.dependencyInjection.ApplicationComponent;
-import com.droidit.newstemplate.dependencyInjection.BasicExampleComponent;
-import com.droidit.newstemplate.dependencyInjection.DaggerBasicExampleComponent;
+import com.droidit.newstemplate.dependencyInjection.DaggerNewsListComponent;
 import com.droidit.newstemplate.dependencyInjection.NetworkModule;
+import com.droidit.newstemplate.dependencyInjection.NewsListComponent;
 import com.droidit.newstemplate.dependencyInjection.WireframeModule;
 
 import javax.inject.Inject;
@@ -25,15 +25,13 @@ import butterknife.OnClick;
  * Created by JohannesC on 30-May-16.
  * Basic activity which shows MVP, navigation, and some networking logic
  */
-public class BasicExampleActivity extends AppCompatActivity implements BasicExampleContract.View {
+public class NewsListActivity extends AppCompatActivity implements NewsListContract.View {
 
     @BindView(R.id.activity_main_posts_tv)
     TextView activity_main_posts_tv;
 
-    private BasicExampleComponent basicExampleComponent;
-
     @Inject
-    BasicExamplePresenter basicExamplePresenter;
+    NewsListPresenter newsListPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +39,7 @@ public class BasicExampleActivity extends AppCompatActivity implements BasicExam
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         this.initializeInjector();
-        basicExamplePresenter.onCreate(this);
+        newsListPresenter.onCreate(this);
     }
 
     protected ApplicationComponent getApplicationComponent() {
@@ -49,22 +47,22 @@ public class BasicExampleActivity extends AppCompatActivity implements BasicExam
     }
 
     private void initializeInjector() {
-        this.basicExampleComponent = DaggerBasicExampleComponent.builder()
+        NewsListComponent newsListComponent = DaggerNewsListComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .networkModule(new NetworkModule("http://jsonplaceholder.typicode.com/"))
                 .wireframeModule(new WireframeModule(this))
                 .build();
-        basicExampleComponent.inject(this);
+        newsListComponent.inject(this);
     }
 
     @OnClick(R.id.activity_main_launch_connection_btn)
     public void onLaunchConnectionBtnClick() {
-        basicExamplePresenter.onConnectionButtonClicked();
+        newsListPresenter.onConnectionButtonClicked();
     }
 
     @OnClick(R.id.activity_main_get_posts_btn)
     public void onGetPostsBtnClick() {
-        basicExamplePresenter.onGetPostsBtnClick();
+        newsListPresenter.onGetPostsBtnClick();
     }
 
     @Override

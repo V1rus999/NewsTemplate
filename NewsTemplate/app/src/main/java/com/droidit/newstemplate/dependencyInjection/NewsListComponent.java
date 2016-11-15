@@ -1,6 +1,6 @@
 package com.droidit.newstemplate.dependencyInjection;
 
-import com.droidit.newstemplate.basicExample.BasicExampleActivity;
+import com.droidit.newstemplate.basicExample.NewsListActivity;
 
 import dagger.Component;
 
@@ -9,8 +9,8 @@ import dagger.Component;
  */
 @PerActivity
 @Component(dependencies = ApplicationComponent.class, modules = {NetworkModule.class, WireframeModule.class})
-public interface BasicExampleComponent {
+public interface NewsListComponent {
 
-    void inject(BasicExampleActivity basicExampleActivity);
+    void inject(NewsListActivity newsListActivity);
 
 }

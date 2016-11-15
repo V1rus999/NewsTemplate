@@ -2,7 +2,7 @@ package com.droidit.newstemplate.basicExample;
 
 import android.app.Activity;
 
-import com.droidit.domain.basicExample.BasicExampleContract;
+import com.droidit.domain.basicExample.NewsListContract;
 import com.droidit.newstemplate.emptyExample.EmptyExampleActivity;
 
 import javax.inject.Inject;
@@ -11,7 +11,7 @@ import javax.inject.Inject;
  * Created by JohannesC on 07-Sep-16.
  * All navigation logic goes in here
  */
-public class BasicExampleWireframe implements BasicExampleContract.WireFrame {
+public class BasicExampleWireframe implements NewsListContract.WireFrame {
 
     private final Activity context;
 

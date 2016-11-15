@@ -13,20 +13,20 @@ import javax.inject.Inject;
  * Created by JohannesC on 05-Sep-16.
  * View tells the Presenter about state and the Presenter instructs the View to do something.
  */
-public class BasicExamplePresenter implements BasicExampleContract.Presenter {
+public class NewsListPresenter implements NewsListContract.Presenter {
 
-    private final BasicExampleContract.WireFrame wireframe;
+    private final NewsListContract.WireFrame wireframe;
     private final PostInteractor postInteractor;
-    private BasicExampleContract.View view;
+    private NewsListContract.View view;
 
     @Inject
-    public BasicExamplePresenter(BasicExampleContract.WireFrame basicExampleWireframe, PostInteractor postInteractor) {
+    public NewsListPresenter(NewsListContract.WireFrame basicExampleWireframe, PostInteractor postInteractor) {
         wireframe = basicExampleWireframe;
         this.postInteractor = postInteractor;
     }
 
     @Override
-    public void onCreate(BasicExampleContract.View view) {
+    public void onCreate(NewsListContract.View view) {
         this.view = view;
     }
 

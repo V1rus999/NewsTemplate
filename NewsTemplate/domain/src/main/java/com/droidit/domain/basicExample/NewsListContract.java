@@ -7,7 +7,7 @@ import com.droidit.domain.BaseContract;
  * Created by JohannesC on 05-Sep-16.
  * This makes it easier to understand how your application modules work
  */
-public interface BasicExampleContract {
+public interface NewsListContract {
 
     interface Presenter extends BaseContract.Presenter<View> {
         void onConnectionButtonClicked();
