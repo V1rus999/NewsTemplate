@@ -1,11 +1,15 @@
 package com.droidit.newstemplate.news_list;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +23,7 @@ import com.droidit.newstemplate.dependencyInjection.DaggerNewsListComponent;
 import com.droidit.newstemplate.dependencyInjection.NetworkModule;
 import com.droidit.newstemplate.dependencyInjection.NewsListComponent;
 import com.droidit.newstemplate.dependencyInjection.WireframeModule;
+import com.droidit.newstemplate.emptyExample.EmptyExampleActivity;
 import com.droidit.newstemplate.news_list.list.NewsListDividerItemDecorator;
 import com.droidit.newstemplate.news_list.list.NewsListItemAdapter;
 
@@ -70,20 +75,9 @@ public class NewsListActivity extends AppCompatActivity implements NewsListContr
         newsListComponent.inject(this);
     }
 
-    @OnClick(R.id.activity_main_launch_connection_btn)
-    public void onLaunchConnectionBtnClick() {
-        newsListPresenter.onConnectionButtonClicked();
-    }
-
     @OnClick(R.id.activity_main_get_posts_btn)
     public void onGetPostsBtnClick() {
         newsListPresenter.onGetPostsBtnClick();
-    }
-
-    @Override
-    public void displaySinglePostTitle(String title) {
-        activity_main_posts_tv.setTextColor(Color.BLACK);
-        activity_main_posts_tv.setText(title);
     }
 
     @Override
@@ -97,8 +91,10 @@ public class NewsListActivity extends AppCompatActivity implements NewsListContr
         newsListItemAdapter = new NewsListItemAdapter();
         newsListItemAdapter.setOnItemClickListener(new NewsListItemAdapter.ClickListener() {
             @Override
-            public void onItemClick(int position) {
-                Toast.makeText(NewsListActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+            public void onItemClick(int position, View v) {
+                Intent intent = EmptyExampleActivity.getActivityIntent(NewsListActivity.this, ((TextView) v).getText().toString());
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(NewsListActivity.this, v, "profile");
+                ActivityCompat.startActivity(NewsListActivity.this, intent, options.toBundle());
             }
         });
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());

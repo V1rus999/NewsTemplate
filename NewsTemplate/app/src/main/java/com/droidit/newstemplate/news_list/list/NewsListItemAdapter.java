@@ -55,6 +55,6 @@ public class NewsListItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public interface ClickListener {
-        void onItemClick(int position);
+        void onItemClick(int position, View v);
     }
 }

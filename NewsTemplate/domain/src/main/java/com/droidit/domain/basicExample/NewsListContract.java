@@ -13,14 +13,11 @@ import java.util.List;
 public interface NewsListContract {
 
     interface Presenter extends BaseContract.Presenter<View> {
-        void onConnectionButtonClicked();
 
         void onGetPostsBtnClick();
     }
 
     interface View extends BaseContract.View {
-
-        void displaySinglePostTitle(String title);
 
         void displayConnectionError(String message);
 
@@ -30,6 +27,6 @@ public interface NewsListContract {
     }
 
     interface WireFrame {
-        void onConnectionButtonClicked();
+        void onListItemSelected();
     }
 }

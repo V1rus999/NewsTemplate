@@ -41,7 +41,7 @@ public class NewsListItemViewHolder extends RecyclerView.ViewHolder implements V
     @Override
     public void onClick(View v) {
         if (clickListener != null) {
-            clickListener.onItemClick(getAdapterPosition());
+            clickListener.onItemClick(getAdapterPosition(), news_list_item_title);
         }
     }
 }

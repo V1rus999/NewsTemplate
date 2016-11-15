@@ -3,7 +3,7 @@ package com.droidit.newstemplate.dependencyInjection;
 import android.app.Activity;
 
 import com.droidit.domain.basicExample.NewsListContract;
-import com.droidit.newstemplate.news_list.BasicExampleWireframe;
+import com.droidit.newstemplate.news_list.NewsListWireframe;
 
 import dagger.Module;
 import dagger.Provides;
@@ -26,7 +26,7 @@ public class WireframeModule {
     }
 
     @Provides
-    public NewsListContract.WireFrame provideBasicExampleWireframe(BasicExampleWireframe basicExampleWireframe) {
-        return basicExampleWireframe;
+    public NewsListContract.WireFrame provideBasicExampleWireframe(NewsListWireframe newsListWireframe) {
+        return newsListWireframe;
     }
 }

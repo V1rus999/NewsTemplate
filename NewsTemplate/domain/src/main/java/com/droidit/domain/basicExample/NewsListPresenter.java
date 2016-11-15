@@ -35,11 +35,6 @@ public class NewsListPresenter implements NewsListContract.Presenter {
     }
 
     @Override
-    public void onConnectionButtonClicked() {
-        wireframe.onConnectionButtonClicked();
-    }
-
-    @Override
     public void onGetPostsBtnClick() {
         postInteractor.getPosts(new DefaultCallback<List<PostDto>>() {
             @Override

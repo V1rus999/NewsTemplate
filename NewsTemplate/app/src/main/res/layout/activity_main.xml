@@ -11,12 +11,6 @@
     tools:context=".news_list.NewsListActivity">
 
     <Button
-        android:id="@+id/activity_main_launch_connection_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Launch Connection Activity" />
-
-    <Button
         android:id="@+id/activity_main_get_posts_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
