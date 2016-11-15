@@ -15,16 +15,17 @@ import java.util.List;
  * Created by johannesC on 2016/11/15.
  */
 
-public class NewsListItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class NewsListItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
 
     private List<PostDto> posts = new ArrayList<>();
+    private ClickListener clickListener;
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.news_list_row_item, parent, false);
 
-        return new NewsListItemViewHolder(itemView);
+        return new NewsListItemViewHolder(itemView, clickListener);
     }
 
     @Override
@@ -42,5 +43,18 @@ public class NewsListItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public int getItemCount() {
         return posts != null ? posts.size() : 0;
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    public void setOnItemClickListener(ClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
+
+    public interface ClickListener {
+        void onItemClick(int position);
     }
 }

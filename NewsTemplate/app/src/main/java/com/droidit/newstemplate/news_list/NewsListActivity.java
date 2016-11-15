@@ -7,6 +7,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.droidit.domain.basicExample.NewsListContract;
 import com.droidit.domain.basicExample.NewsListPresenter;
@@ -94,6 +95,12 @@ public class NewsListActivity extends AppCompatActivity implements NewsListContr
     @Override
     public void setupInitialList() {
         newsListItemAdapter = new NewsListItemAdapter();
+        newsListItemAdapter.setOnItemClickListener(new NewsListItemAdapter.ClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Toast.makeText(NewsListActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         news_list_rv.setLayoutManager(mLayoutManager);
         news_list_rv.addItemDecoration(new NewsListDividerItemDecorator(NewsListActivity.this, LinearLayoutManager.VERTICAL));
