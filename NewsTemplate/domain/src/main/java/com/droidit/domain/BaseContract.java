@@ -7,7 +7,9 @@ package com.droidit.domain;
 public interface BaseContract {
 
     interface Presenter<T extends View> {
-        void onCreate(T view);
+        void onViewAttached(T view);
+
+        void onCreate();
     }
 
     interface View {
