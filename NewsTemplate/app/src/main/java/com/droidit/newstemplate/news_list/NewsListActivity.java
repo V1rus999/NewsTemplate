@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
@@ -39,6 +40,9 @@ import butterknife.OnClick;
  * Basic activity which shows MVP, navigation, and some networking logic
  */
 public class NewsListActivity extends AppCompatActivity implements NewsListContract.View {
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
 
     @BindView(R.id.activity_main_posts_tv)
     TextView activity_main_posts_tv;
@@ -110,6 +114,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsListContr
 
     @Override
     public void setupInitialList() {
+        toolbar.setTitle("AWE");
         newsListItemAdapter = new NewsListItemAdapter();
         newsListItemAdapter.setOnItemClickListener(new NewsListItemAdapter.ClickListener() {
             @Override
