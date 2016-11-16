@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -45,6 +46,9 @@ public class NewsListActivity extends AppCompatActivity implements NewsListContr
     @BindView(R.id.news_list_rv)
     RecyclerView news_list_rv;
 
+    @BindView(R.id.news_list_swipe_refresh)
+    SwipeRefreshLayout news_list_swipe_refresh;
+
     @Inject
     NewsListPresenter newsListPresenter;
 
@@ -73,15 +77,35 @@ public class NewsListActivity extends AppCompatActivity implements NewsListContr
         newsListComponent.inject(this);
     }
 
-    @OnClick(R.id.activity_main_get_posts_btn)
-    public void onGetPostsBtnClick() {
-        newsListPresenter.onGetPostsBtnClick();
-    }
-
     @Override
     public void displayConnectionError(String message) {
         activity_main_posts_tv.setTextColor(Color.RED);
         activity_main_posts_tv.setText(message);
+    }
+
+    @Override
+    public void setupSwipeToRefresh() {
+        news_list_swipe_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                newsListPresenter.onSwipeToRefresh();
+            }
+        });
+    }
+
+    @Override
+    public void displayBusyIndicator() {
+        news_list_swipe_refresh.post(new Runnable() {
+            @Override
+            public void run() {
+                news_list_swipe_refresh.setRefreshing(true);
+            }
+        });
+    }
+
+    @Override
+    public void hideBusyIndicator() {
+        news_list_swipe_refresh.setRefreshing(false);
     }
 
     @Override

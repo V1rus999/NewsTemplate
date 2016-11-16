@@ -14,12 +14,18 @@ public interface NewsListContract {
 
     interface Presenter extends BaseContract.Presenter<View> {
 
-        void onGetPostsBtnClick();
+        void onSwipeToRefresh();
     }
 
     interface View extends BaseContract.View {
 
         void displayConnectionError(String message);
+
+        void setupSwipeToRefresh();
+
+        void displayBusyIndicator();
+
+        void hideBusyIndicator();
 
         void setupInitialList();
 

@@ -32,20 +32,27 @@ public class NewsListPresenter implements NewsListContract.Presenter {
     @Override
     public void onCreate() {
         view.setupInitialList();
+        view.setupSwipeToRefresh();
+        view.displayBusyIndicator();
+        postInteractor.getPosts(postListCallback);
     }
 
     @Override
-    public void onGetPostsBtnClick() {
-        postInteractor.getPosts(new DefaultCallback<List<PostDto>>() {
-            @Override
-            public void onSuccess(List<PostDto> success) {
-                view.updateListWithNewData(success);
-            }
-
-            @Override
-            public void onFailure(Throwable throwable) {
-                view.displayConnectionError(throwable.getMessage());
-            }
-        });
+    public void onSwipeToRefresh() {
+        postInteractor.getPosts(postListCallback);
     }
+
+    private final DefaultCallback<List<PostDto>> postListCallback = new DefaultCallback<List<PostDto>>() {
+        @Override
+        public void onSuccess(List<PostDto> success) {
+            view.updateListWithNewData(success);
+            view.hideBusyIndicator();
+        }
+
+        @Override
+        public void onFailure(Throwable throwable) {
+            view.displayConnectionError(throwable.getMessage());
+            view.hideBusyIndicator();
+        }
+    };
 }
