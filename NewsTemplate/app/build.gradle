@@ -25,8 +25,10 @@ dependencies {
     compile project(path: ':domain')
     compile project(path: ':networking')
 
+    //Android
     compile 'com.android.support:appcompat-v7:23.+'
     compile 'com.android.support:recyclerview-v7:23.1.1'
+    compile 'com.android.support:cardview-v7:23.3.+'
 
     //DI
     apt 'com.google.dagger:dagger-compiler:2.6.1'

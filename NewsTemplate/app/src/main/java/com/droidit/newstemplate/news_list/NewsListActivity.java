@@ -11,7 +11,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.droidit.domain.basicExample.NewsListContract;
 import com.droidit.domain.basicExample.NewsListPresenter;
@@ -24,7 +23,6 @@ import com.droidit.newstemplate.dependencyInjection.NetworkModule;
 import com.droidit.newstemplate.dependencyInjection.NewsListComponent;
 import com.droidit.newstemplate.dependencyInjection.WireframeModule;
 import com.droidit.newstemplate.emptyExample.EmptyExampleActivity;
-import com.droidit.newstemplate.news_list.list.NewsListDividerItemDecorator;
 import com.droidit.newstemplate.news_list.list.NewsListItemAdapter;
 
 import java.util.List;
@@ -99,7 +97,6 @@ public class NewsListActivity extends AppCompatActivity implements NewsListContr
         });
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         news_list_rv.setLayoutManager(mLayoutManager);
-        news_list_rv.addItemDecoration(new NewsListDividerItemDecorator(NewsListActivity.this, LinearLayoutManager.VERTICAL));
         news_list_rv.setItemAnimator(new DefaultItemAnimator());
         news_list_rv.setAdapter(newsListItemAdapter);
     }
