@@ -15,7 +15,6 @@ import com.droidit.newstemplate.R;
 public class EmptyExampleActivity extends AppCompatActivity {
 
     public static Intent getActivityIntent(final Context context, final String titleText) {
-
         Intent intent = new Intent(context, EmptyExampleActivity.class);
         intent.putExtra("AWE", titleText);
         return intent;

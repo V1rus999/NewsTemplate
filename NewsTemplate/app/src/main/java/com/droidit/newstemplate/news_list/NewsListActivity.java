@@ -3,14 +3,20 @@ package com.droidit.newstemplate.news_list;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -33,7 +39,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by JohannesC on 30-May-16.
@@ -41,8 +46,14 @@ import butterknife.OnClick;
  */
 public class NewsListActivity extends AppCompatActivity implements NewsListContract.View {
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    @BindView(R.id.news_list_drawer)
+    DrawerLayout news_list_drawer;
+
+    @BindView(R.id.news_list_navigation_view)
+    NavigationView news_list_navigation_view;
+
+    @BindView(R.id.news_list_toolbar)
+    Toolbar news_list_toolbar;
 
     @BindView(R.id.activity_main_posts_tv)
     TextView activity_main_posts_tv;
@@ -61,7 +72,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsListContr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_news_list);
         ButterKnife.bind(this);
         this.initializeInjector();
         newsListPresenter.onViewAttached(this);
@@ -86,6 +97,48 @@ public class NewsListActivity extends AppCompatActivity implements NewsListContr
         activity_main_posts_tv.setTextColor(Color.RED);
         activity_main_posts_tv.setText(message);
     }
+
+    @Override
+    public void setupMenuAndToolbar() {
+        setSupportActionBar(news_list_toolbar);
+
+        news_list_navigation_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                item.setChecked(true);
+                news_list_drawer.closeDrawers();
+                return true;
+            }
+        });
+
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,news_list_drawer,news_list_toolbar,R.string.openDrawer, R.string.closeDrawer){
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+        };
+
+        news_list_drawer.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                news_list_drawer.openDrawer(GravityCompat.START);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     @Override
     public void setupSwipeToRefresh() {
@@ -114,7 +167,6 @@ public class NewsListActivity extends AppCompatActivity implements NewsListContr
 
     @Override
     public void setupInitialList() {
-        toolbar.setTitle("AWE");
         newsListItemAdapter = new NewsListItemAdapter();
         newsListItemAdapter.setOnItemClickListener(new NewsListItemAdapter.ClickListener() {
             @Override

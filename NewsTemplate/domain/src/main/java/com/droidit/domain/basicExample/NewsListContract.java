@@ -21,6 +21,8 @@ public interface NewsListContract {
 
         void displayConnectionError(String message);
 
+        void setupMenuAndToolbar();
+
         void setupSwipeToRefresh();
 
         void displayBusyIndicator();
